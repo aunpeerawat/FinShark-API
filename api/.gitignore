@@ -1,0 +1,77 @@
+# ===============================
+# .NET / ASP.NET Core
+# ===============================
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.tmp
+
+# ===============================
+# Visual Studio
+# ===============================
+.vs/
+*.vspscc
+*.vssscc
+*.pidb
+*.svclog
+
+# ===============================
+# Visual Studio Code
+# ===============================
+.vscode/
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# ===============================
+# Rider / JetBrains
+# ===============================
+.idea/
+*.sln.iml
+
+# ===============================
+# OS generated
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# Build / publish
+# ===============================
+publish/
+artifacts/
+
+# ===============================
+# User secrets / environment
+# ===============================
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+secrets.json
+.env
+.env.*
+
+# ===============================
+# Logs
+# ===============================
+logs/
+*.log
+
+# ===============================
+# Entity Framework
+# ===============================
+Migrations/*.Designer.cs
+Migrations/*.csproj
+
+# ===============================
+# Test results
+# ===============================
+TestResults/
+
+# ===============================
+# Coverage
+# ===============================
+coverage/
