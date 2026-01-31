@@ -42,3 +42,47 @@ Role ก็ถือเป็น Claim ชนิดหนึ่ง
 
 
 
+
+static ใน C# ใช้ทำอะไรบ้าง?
+
+1️⃣ static field (ตัวแปร)
+public static int Count;
+
+
+ใช้ร่วมกันทุก object
+
+เปลี่ยนที่หนึ่ง → ทุกที่เห็นเหมือนกัน
+
+2️⃣ static method (เมธอด)
+public static void SayHello()
+{
+    Console.WriteLine("Hello");
+}
+
+
+เรียกใช้:
+
+MyClass.SayHello();
+
+
+✔ ไม่ต้อง new MyClass()
+
+3️⃣ static class
+public static class MathHelper
+{
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+
+
+คุณสมบัติ:
+
+❌ ห้าม new
+
+❌ ห้ามมี non-static member
+
+✔ ใช้เป็น helper / utility
+
+

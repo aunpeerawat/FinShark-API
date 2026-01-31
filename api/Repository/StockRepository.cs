@@ -20,7 +20,7 @@ namespace api.Repository
         }
         public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            var stock = _context.Stock.Include(c => c.Comments).AsQueryable();
+            var stock = _context.Stocks.Include(c => c.Comments).ThenInclude(a => a.AppUser).AsQueryable();
             if (!string.IsNullOrWhiteSpace(query.CompanyName))
             {
                 stock = stock.Where(s => s.CompanyName.Contains(query.CompanyName));
@@ -42,28 +42,28 @@ namespace api.Repository
         }
         public async Task<Stock> CreateAsync(Stock stockModel)
         {
-            await _context.Stock.AddAsync(stockModel);
+            await _context.Stocks.AddAsync(stockModel);
             await _context.SaveChangesAsync();
             return stockModel;
         }
         public async Task<Stock?> DeleteAsync(int id)
         {
-            var stockModel = await _context.Stock.FirstOrDefaultAsync(x => x.Id == id);
+            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
             if (stockModel == null)
             {
                 return null;
             }
-            _context.Stock.Remove(stockModel);
+            _context.Stocks.Remove(stockModel);
             await _context.SaveChangesAsync();
             return stockModel;
         }
         public async Task<Stock?> GetByIdAsync(int id)
         {
-            return await _context.Stock.Include(c => c.Comments).FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.Stocks.Include(c => c.Comments).FirstOrDefaultAsync(i => i.Id == id);
         }
         public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto updateDto)
         {
-            var stockModel = await _context.Stock.FirstOrDefaultAsync(x => x.Id == id);
+            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
             if (stockModel == null)
             {
                 return null;
@@ -79,7 +79,12 @@ namespace api.Repository
         }
         public Task<bool> StockExists(int id)
         {
-            return _context.Stock.AnyAsync(s => s.Id == id);
+            return _context.Stocks.AnyAsync(s => s.Id == id);
+        }
+
+        public async Task<Stock?> GetBySymbolAsync(string symbol)
+        {
+            return await _context.Stocks.FirstOrDefaultAsync(s => s.Symbol==symbol);
         }
     }
 }
